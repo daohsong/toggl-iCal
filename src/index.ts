@@ -6,7 +6,7 @@ import url from "url";
 import querystring from "querystring";
 
 interface TogglEntryWithProject extends TogglEntry {
-  project: TogglProject | null
+  project: TogglProject | null;
 }
 
 async function getData({ token }: { token: string }) {
@@ -15,25 +15,22 @@ async function getData({ token }: { token: string }) {
   const loadProjectById = toggl.projectByIdLoaderFactory();
 
   const entries = await toggl.getEntries({
-    start_date: moment()
-      .subtract(6, "months")
-      .toDate(),
+    start_date: moment().subtract(120, "months").toDate(),
     end_date: moment().toDate(),
   });
 
   const entriesWithProjects = await Promise.all(
-    entries
-      .map(async entry => {
-        let project: TogglProject | null = null
-        if (entry.pid) {
-          project = await loadProjectById(entry.pid!);
-        }
+    entries.map(async (entry) => {
+      let project: TogglProject | null = null;
+      if (entry.pid) {
+        project = await loadProjectById(entry.pid!);
+      }
 
-        return {
-          ...entry,
-          project,
-        };
-      }),
+      return {
+        ...entry,
+        project,
+      };
+    })
   );
 
   return {
@@ -41,37 +38,34 @@ async function getData({ token }: { token: string }) {
   };
 }
 
-
 function createCal({ entries }: { entries: TogglEntryWithProject[] }) {
   const cal = ical({
     name: "Toggl time entries",
-    domain: "kattcorp.com",
+    domain: "daohsong.com",
   });
 
   for (const entry of entries) {
-    const icon = entry.billable ? "💲" : "❌";
-
     const durationInHoursRounded =
       Math.round((entry.duration / 60 / 60) * 10) / 10;
     const duration =
       durationInHoursRounded > 0 ? `${durationInHoursRounded}h` : "n/a";
 
-    const projectName = entry.project ? entry.project.name : 'n/a'
-    let summary = `${icon} ${projectName}`
+    const projectName = entry.project ? entry.project.name : "n/a";
+    let summary = `${projectName}`;
     if (entry.description) {
-      summary += `: ${entry.description}`
+      summary += `: ${entry.description}`;
     }
-    summary += ` - ⏳: ${duration}`
+    summary += ` - ⏳: ${duration}`;
     cal.createEvent({
       start: moment(entry.start),
       end: moment(entry.stop),
-      summary,
+      summary: projectName,
+      description: entry.description,
     });
   }
 
   return cal;
 }
-
 
 export default async (req: IncomingMessage, res: ServerResponse) => {
   const parts = url.parse(req.url!);
@@ -83,15 +77,15 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
     return;
   }
 
-  const data = await getData({ token })
+  const data = await getData({ token });
 
-  if (parts.pathname === '/index.json') {
-    res.writeHead(200, { 'content-type': 'application/json' })
-    res.end(JSON.stringify(data, null, 4))
-    return
+  if (parts.pathname === "/index.json") {
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify(data, null, 4));
+    return;
   }
 
-  const cal = createCal(data)
+  const cal = createCal(data);
 
   cal.serve(res);
 };
