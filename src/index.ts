@@ -71,13 +71,13 @@ function createCal({ entries }: { entries: TogglEntryWithProject[] }) {
       start: moment(entry.start),
       end: moment(entry.stop),
       summary: projectName,
-      // description: description,
-      // categories: [{ name: "haha" }],
+      description: description,
+      categories: [{ name: "haha" }],
     });
-    event.description({
-      plain: description,
-      html: "<p>" + description + "<p>",
-    });
+    // event.description({
+    //   plain: description,
+    //   html: "<p>" + description + "<p>",
+    // });
     event.location("test location");
     // event.status(ICalEventStatus.CONFIRMED);
     // event.categories();
