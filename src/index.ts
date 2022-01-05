@@ -78,10 +78,10 @@ function createCal({ entries }: { entries: TogglEntryWithProject[] }) {
     //   plain: description,
     //   html: "<p>" + description + "<p>",
     // });
-    // event.location({
-    //   title: "test location",
-    // });
-    event.status(ICalEventStatus.CONFIRMED);
+    event.location({
+      title: "test location",
+    });
+    // event.status(ICalEventStatus.CONFIRMED);
     // event.categories();
   }
 
