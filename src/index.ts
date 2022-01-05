@@ -73,7 +73,7 @@ function createCal({ entries }: { entries: TogglEntryWithProject[] }) {
       description: description,
     });
 
-    event.categories(["haha"]);
+    event.categories([{ name: "haha" }]);
   }
 
   return cal;
