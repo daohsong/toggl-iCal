@@ -71,8 +71,8 @@ function createCal({ entries }: { entries: TogglEntryWithProject[] }) {
       start: moment(entry.start),
       end: moment(entry.stop),
       summary: projectName,
-      // description: description,
-      categories: [{ name: "haha" }],
+      description: description,
+      // categories: [{ name: "haha" }],
     });
     // event.description({
     //   plain: description,
@@ -81,7 +81,7 @@ function createCal({ entries }: { entries: TogglEntryWithProject[] }) {
     // event.location({
     //   title: "test location",
     // });
-    event.status(ICalEventStatus.CONFIRMED);
+    // event.status(ICalEventStatus.CONFIRMED);
     // event.categories();
   }
 
