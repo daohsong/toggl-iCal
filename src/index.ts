@@ -60,7 +60,7 @@ function createCal(
       continue;
     }
 
-    let description = entry.description;
+    let description = "";
 
     const tags = entry.tags ? entry.tags : [];
 
