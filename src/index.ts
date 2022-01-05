@@ -47,15 +47,25 @@ function createCal({ entries }: { entries: TogglEntryWithProject[] }) {
   for (const entry of entries) {
     const durationInHoursRounded =
       Math.round((entry.duration / 60 / 60) * 10) / 10;
+
     const duration =
       durationInHoursRounded > 0 ? `${durationInHoursRounded}h` : "n/a";
 
     const projectName = entry.project ? entry.project.name : "n/a";
+
+    let description = entry.description;
+
+    const tags = entry.tags;
+
     let summary = `${projectName}`;
     if (entry.description) {
       summary += `: ${entry.description}`;
     }
     summary += ` - ⏳: ${duration}`;
+
+    for (const tag of tags) {
+      description += ` #${tag}`;
+    }
     cal.createEvent({
       start: moment(entry.start),
       end: moment(entry.stop),

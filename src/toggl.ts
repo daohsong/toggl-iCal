@@ -4,8 +4,8 @@ import qs from "querystring";
 export interface TogglEntry {
   id: number;
   guid: string;
-  wid: number;
-  pid?: number;
+  wid: number; // workspace id
+  pid?: number; // project id
   billable: boolean;
   start: Date;
   stop: Date;
@@ -14,6 +14,7 @@ export interface TogglEntry {
   duronly: boolean;
   at: Date;
   uid: number;
+  tags: Array<String>;
 }
 
 export interface TogglProject {
