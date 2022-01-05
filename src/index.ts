@@ -64,7 +64,7 @@ function createCal(
 
     const tags = entry.tags ? entry.tags : [];
 
-    let summary = `${projectName}`;
+    let summary = ``;
     if (entry.description) {
       summary += `: ${entry.description}`;
     }
