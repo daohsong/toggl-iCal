@@ -1,5 +1,6 @@
 import { createClient, TogglProject, TogglEntry } from "./toggl";
 import ical from "ical-generator";
+import { ICalEventStatus } from "ical-generator";
 import { IncomingMessage, ServerResponse } from "http";
 import moment from "moment";
 import url from "url";
@@ -70,10 +71,18 @@ function createCal({ entries }: { entries: TogglEntryWithProject[] }) {
       start: moment(entry.start),
       end: moment(entry.stop),
       summary: projectName,
-      description: description,
+      // description: description,
+      categories: [{ name: "haha" }],
     });
-
-    event.categories([{ name: "haha" }]);
+    event.description({
+      plain: description,
+      html: "<p>" + description + "<p>",
+    });
+    event.location({
+      title: "test location",
+    });
+    event.status(ICalEventStatus.CONFIRMED);
+    // event.categories();
   }
 
   return cal;
