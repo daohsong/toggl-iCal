@@ -66,12 +66,12 @@ function createCal({ entries }: { entries: TogglEntryWithProject[] }) {
     for (const tag of tags) {
       description += ` #${tag}`;
     }
-    description += `Over`;
+    // description += `Over`;
     cal.createEvent({
       start: moment(entry.start),
       end: moment(entry.stop),
       summary: projectName,
-      description: entry.description,
+      description: description,
     });
   }
 
