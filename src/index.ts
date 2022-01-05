@@ -56,6 +56,9 @@ function createCal(
       durationInHoursRounded > 0 ? `${durationInHoursRounded}h` : "n/a";
 
     const projectName = entry.project ? entry.project.name : "n/a";
+    if (!(projectName == workspace)) {
+      continue;
+    }
 
     let description = entry.description;
 
@@ -76,13 +79,13 @@ function createCal(
       end: moment(entry.stop),
       summary: projectName,
       description: description,
-      categories: [{ name: "haha" }],
+      // categories: [{ name: "haha" }],
     });
     // event.description({
     //   plain: description,
     //   html: "<p>" + description + "<p>",
     // });
-    event.location("test location");
+    // event.location("test location");
     // event.status(ICalEventStatus.CONFIRMED);
     // event.categories();
   }
