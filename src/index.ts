@@ -72,7 +72,7 @@ function createCal(
     for (const tag of tags) {
       description += `\n #${tag}`;
     }
-    description += workspace;
+    // description += workspace;
     const event = cal.createEvent({
       start: moment(entry.start),
       end: moment(entry.stop),
