@@ -74,10 +74,10 @@ function createCal({ entries }: { entries: TogglEntryWithProject[] }) {
       // description: description,
       categories: [{ name: "haha" }],
     });
-    event.description({
-      plain: description,
-      html: "<p>" + description + "<p>",
-    });
+    // event.description({
+    //   plain: description,
+    //   html: "<p>" + description + "<p>",
+    // });
     event.location({
       title: "test location",
     });
