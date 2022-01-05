@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "./src/*.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "env": {
+    "IS_NOW": "true"
+  },
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/src"
+    },
+    {
+      "src": "/index.json",
+      "dest": "/src"
+    }
+  ]
+}
