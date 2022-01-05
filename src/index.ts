@@ -39,7 +39,10 @@ async function getData({ token }: { token: string }) {
   };
 }
 
-function createCal({ entries }: { entries: TogglEntryWithProject[] }) {
+function createCal(
+  { entries }: { entries: TogglEntryWithProject[] },
+  workspace: string
+) {
   const cal = ical({
     name: "Toggl time entries",
     domain: "daohsong.com",
@@ -67,6 +70,7 @@ function createCal({ entries }: { entries: TogglEntryWithProject[] }) {
     for (const tag of tags) {
       description += `\n #${tag}`;
     }
+    description += workspace;
     const event = cal.createEvent({
       start: moment(entry.start),
       end: moment(entry.stop),
@@ -88,13 +92,16 @@ function createCal({ entries }: { entries: TogglEntryWithProject[] }) {
 
 export default async (req: IncomingMessage, res: ServerResponse) => {
   const parts = url.parse(req.url!);
-  const { token } = querystring.parse(parts.query || "");
+  // const { token } = querystring.parse(parts.query || "");
+  const params = querystring.parse(parts.query || "");
 
-  if (typeof token !== "string") {
-    res.writeHead(400);
-    res.end('Missing query parameter "token"');
-    return;
-  }
+  // if (typeof params !== "string") {
+  //   res.writeHead(400);
+  //   res.end('Missing query parameter "token"');
+  //   return;
+  // }
+  const token = params.token ? params.token : "";
+  const workspace = params.workspace ? params.workspace : "";
 
   const data = await getData({ token });
 
@@ -104,7 +111,7 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
     return;
   }
 
-  const cal = createCal(data);
+  const cal = createCal(data, workspace);
 
   cal.serve(res);
 };
