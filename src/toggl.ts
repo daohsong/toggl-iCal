@@ -36,7 +36,7 @@ export interface TogglProject {
 
 export function createClient({ token }: { token: string }) {
   const togglAxios = Axios.create({
-    baseURL: "https://www.toggl.com/api/v8",
+    baseURL: "https://api.track.toggl.com/api/v8",
     auth: {
       username: token,
       password: "api_token",
