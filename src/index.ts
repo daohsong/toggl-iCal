@@ -68,7 +68,6 @@ function createCal(
     if (entry.description) {
       summary += `: ${entry.description}`;
     }
-    summary += ` - ⏳: ${duration}`;
 
     for (const tag of tags) {
       description += `\n #${tag}`;
@@ -77,7 +76,7 @@ function createCal(
     const event = cal.createEvent({
       start: moment(entry.start),
       end: moment(entry.stop),
-      summary: projectName,
+      summary: entry.description,
       description: description,
       // categories: [{ name: "haha" }],
     });
