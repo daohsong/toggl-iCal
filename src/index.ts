@@ -55,7 +55,7 @@ function createCal({ entries }: { entries: TogglEntryWithProject[] }) {
 
     let description = entry.description;
 
-    const tags = entry.tags;
+    const tags = entry.tags ? entry.tags : [];
 
     let summary = `${projectName}`;
     if (entry.description) {
