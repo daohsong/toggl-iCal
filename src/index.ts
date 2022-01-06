@@ -84,7 +84,7 @@ function createCal(
     //   plain: description,
     //   html: "<p>" + description + "<p>",
     // });
-    // event.location("test location");
+    event.location(entry.create_with);
     // event.status(ICalEventStatus.CONFIRMED);
     // event.categories();
   }
