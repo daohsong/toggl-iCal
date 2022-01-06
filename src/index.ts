@@ -80,7 +80,7 @@ function createCal(
     const event = cal.createEvent({
       start: moment(entry.start),
       end: moment(entry.stop),
-      summary: entry.description,
+      summary: summary,
       description: description,
       // categories: [{ name: "haha" }],
     });
