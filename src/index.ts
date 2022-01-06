@@ -77,14 +77,14 @@ function createCal(
       start: moment(entry.start),
       end: moment(entry.stop),
       summary: entry.description,
-      description: description + entry.create_with,
+      description: description + entry.created_with,
       // categories: [{ name: "haha" }],
     });
     // event.description({
     //   plain: description,
     //   html: "<p>" + description + "<p>",
     // });
-    event.location(entry.create_with);
+    event.location(entry.created_with);
     // event.status(ICalEventStatus.CONFIRMED);
     // event.categories();
   }

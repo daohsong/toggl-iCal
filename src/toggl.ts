@@ -15,7 +15,7 @@ export interface TogglEntry {
   at: Date;
   uid: number;
   tags: Array<String>;
-  create_with: string;
+  created_with: string;
 }
 
 export interface TogglProject {
