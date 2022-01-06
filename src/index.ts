@@ -77,7 +77,7 @@ function createCal(
       start: moment(entry.start),
       end: moment(entry.stop),
       summary: entry.description,
-      description: description,
+      description: description + entry.create_with,
       // categories: [{ name: "haha" }],
     });
     // event.description({
