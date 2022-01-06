@@ -65,8 +65,12 @@ function createCal(
     const tags = entry.tags ? entry.tags : [];
 
     let summary = ``;
+    let url = "";
     if (entry.description) {
-      summary += `: ${entry.description}`;
+      summary = entry.description.split(" |")[0];
+      if (entry.description.split(" |").length > 1) {
+        url = "omnifocus:///task/" + entry.description.split(" |")[1];
+      }
     }
 
     for (const tag of tags) {
@@ -77,14 +81,14 @@ function createCal(
       start: moment(entry.start),
       end: moment(entry.stop),
       summary: entry.description,
-      description: description + entry.created_with,
+      description: description,
       // categories: [{ name: "haha" }],
     });
     // event.description({
     //   plain: description,
     //   html: "<p>" + description + "<p>",
     // });
-    event.location(entry.created_with);
+    event.location(url);
     // event.status(ICalEventStatus.CONFIRMED);
     // event.categories();
   }
