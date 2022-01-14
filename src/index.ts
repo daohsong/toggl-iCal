@@ -78,7 +78,7 @@ function createCal(
     }
     // description += workspace;
     const event = cal.createEvent({
-      start: moment(entry.start),
+      start: moment(entry.start).add(1, "minutes").seconds(0),
       end: moment(entry.stop),
       summary: summary,
       description: description,
